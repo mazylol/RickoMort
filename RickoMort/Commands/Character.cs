@@ -3,10 +3,10 @@ using DSharpPlus.SlashCommands;
 
 namespace RickoMort.Commands;
 
-public abstract class Character : ApplicationCommandModule
+public class Character : ApplicationCommandModule
 {
     [SlashCommand("character", "Get a character from Rick and Morty")]
-    public async Task CharacterCommand(InteractionContext ctx,
+    public static async Task CharacterCommand(InteractionContext ctx,
         [Option("name", "The name of the character")]
         string name)
     {
