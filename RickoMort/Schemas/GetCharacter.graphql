@@ -1,0 +1,9 @@
+query GetCharacter($filter: String!) {
+    characters(page: 1, filter: { name: $filter }) {
+        results {
+            name
+            status
+            image
+        }
+    }
+}
