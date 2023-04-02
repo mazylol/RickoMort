@@ -3,6 +3,17 @@ query GetCharacter($filter: String!) {
         results {
             name
             status
+            species
+            type
+            gender
+            origin {
+                name
+                dimension
+            }
+            location {
+                name
+                dimension
+            }
             image
         }
     }

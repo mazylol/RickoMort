@@ -2,8 +2,10 @@
 using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
+using DSharpPlus.SlashCommands;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RickoMort.Commands;
 using RickoMort.GraphQL;
 
 namespace RickoMort
@@ -21,7 +23,7 @@ namespace RickoMort
         {
             Env.TraversePath().Load();
             var discordToken = Env.GetString("DEV_TOKEN");
-            var guildId = Convert.ToInt64(Env.GetString("GUILD_ID"));
+            var guildId = Convert.ToUInt64(Env.GetString("GUILD_ID"));
 
             var serviceCollection = new ServiceCollection();
 
@@ -43,6 +45,10 @@ namespace RickoMort
             });
 
             discord.Ready += DiscordReady;
+
+            var slash = discord.UseSlashCommands();
+
+            slash.RegisterCommands<Character>(guildId);
 
             await discord.ConnectAsync();
             await Task.Delay(-1);
